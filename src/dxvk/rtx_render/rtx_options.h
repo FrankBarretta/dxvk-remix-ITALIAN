@@ -254,8 +254,8 @@ namespace dxvk {
     RTX_OPTION("rtx", bool, showRaytracingOption, true, "Enables or disables the option to toggle ray tracing in the UI. When set to false the ray tracing checkbox will not appear in the Remix UI.");
 
     RTX_OPTION_ENV("rtx", bool, enableRaytracing, true, "DXVK_ENABLE_RAYTRACING",
-                   "Globally enables or disables ray tracing. When set to false the original game should render mostly as it would in DXVK typically.\n"
-                   "Some artifacts may still appear however compared to the original game either due to issues with the underlying DXVK translation or issues in Remix itself.");
+                   "Abilita o disabilita globalmente il ray tracing. Quando impostato su falso, il gioco originale dovrebbe essere reso per lo più come farebbe in DXVK tipicamente.\n"
+                   "Tuttavia, alcuni artefatti potrebbero ancora apparire rispetto al gioco originale a causa di problemi con la traduzione DXVK sottostante o problemi in Remix stesso.");
 
     // Note: This time is in milliseconds, should be named something like millisecondDeltaBetweenFrames ideally, but keeping it as it is for now.
     RTX_OPTION_ENV("rtx", float, timeDeltaBetweenFrames, 0.f, "RTX_FRAME_TIME_DELTA_MS",
@@ -268,24 +268,24 @@ namespace dxvk {
                "This will be scaled by the default value of 120 pixels.\n"
                "This value must always be greater than zero.");
     RTX_OPTION("rtx", bool, skipDrawCallsPostRTXInjection, false, "Ignores all draw calls recorded after RTX Injection, the location of which varies but is currently based on when tagged UI textures begin to draw.");
-    RTX_OPTION_ENV("rtx", DlssPreset, dlssPreset, DlssPreset::On, "RTX_DLSS_PRESET", "Combined DLSS Preset for quickly controlling Upscaling, Frame Interpolation and Latency Reduction.");
+    RTX_OPTION_ENV("rtx", DlssPreset, dlssPreset, DlssPreset::On, "RTX_DLSS_PRESET", "Preset combinato DLSS per controllare rapidamente Upscaling, Interpolazione dei Frame e Riduzione della Latenza.");
     RTX_OPTION("rtx", NisPreset, nisPreset, NisPreset::Balanced, "Adjusts NIS scaling factor, trades quality for performance.");
     RTX_OPTION("rtx", TaauPreset, taauPreset, TaauPreset::Balanced,  "Adjusts TAA-U scaling factor, trades quality for performance.");
-    RTX_OPTION_ENV("rtx", GraphicsPreset, graphicsPreset, GraphicsPreset::Auto, "DXVK_GRAPHICS_PRESET_TYPE", "Overall rendering preset, higher presets result in higher image quality, lower presets result in better performance.");
+    RTX_OPTION_ENV("rtx", GraphicsPreset, graphicsPreset, GraphicsPreset::Auto, "DXVK_GRAPHICS_PRESET_TYPE", "Preset generale di rendering, preset più alti risultano in una qualità dell'immagine maggiore, preset più bassi risultano in prestazioni migliori.");
     RTX_OPTION_ENV("rtx", RaytraceModePreset, raytraceModePreset, RaytraceModePreset::Auto, "DXVK_RAYTRACE_MODE_PRESET_TYPE", "");
     RTX_OPTION_ENV("rtx", std::string, sourceRootPath, "", "RTX_SOURCE_ROOT", "A path pointing at the root folder of the project, used to override the path to the root of the project generated at build-time (as this path is only valid for the machine the project was originally compiled on). Used primarily for locating shader source files for runtime shader recompilation.");
     RTX_OPTION("rtx", bool,  recompileShadersOnLaunch, false, "When set to true runtime shader recompilation will execute on the first frame after launch.");
     RTX_OPTION("rtx", bool, useLiveShaderEditMode, false, "When set to true shaders will be automatically recompiled when any shader file is updated (saved for instance) in addition to the usual manual recompilation trigger.");
     RTX_OPTION("rtx", float, emissiveIntensity, 1.0f, "A general scale factor on all emissive intensity values globally. Generally per-material emissive intensities should be used, but this option may be useful for debugging without needing to author materials.");
-    RTX_OPTION("rtx", float, fireflyFilteringLuminanceThreshold, 1000.0f, "Maximum luminance threshold for the firefly filtering to clamp to.");
-    RTX_OPTION("rtx", float, secondarySpecularFireflyFilteringThreshold, 1000.0f, "Firefly luminance clamping threshold for secondary specular signal.");
+    RTX_OPTION("rtx", float, fireflyFilteringLuminanceThreshold, 1000.0f, "Soglia massima di luminanza per il clamping del filtraggio delle firefly.");
+    RTX_OPTION("rtx", float, secondarySpecularFireflyFilteringThreshold, 1000.0f, "Soglia di clamping della luminanza delle firefly per il segnale speculare secondario.");
     RTX_OPTION("rtx", float, vertexColorStrength, 0.6f,
                "A scalar to apply to how strong vertex color influence should be on materials.\n"
                "A value of 1 indicates that it should be fully considered (though do note the texture operation and relevant parameters still control how much it should be blended with the actual albedo color), a value of 0 indicates that it should be fully ignored.");
     RTX_OPTION("rtx", bool, allowFSE, false,
-               "A flag indicating if the application should be able to utilize exclusive full screen mode when set to true, otherwise force it to be disabled when set to false.\n"
-               "Exclusive full screen may see performance benefits over other fullscreen modes at the cost of stability in some cases.\n"
-               "Do note that on modern Windows full screen optimizations will likely be used regardless which in most cases results in performance similar to exclusive full screen even when it is not in use.");
+               "Un flag che indica se l'applicazione dovrebbe essere in grado di utilizzare la modalità esclusiva a schermo intero quando impostata su vero, altrimenti forzala a essere disabilitata quando impostata su falso.\n"
+               "Lo schermo intero esclusivo può vedere benefici di prestazioni rispetto ad altre modalità a schermo intero a costo di stabilità in alcuni casi.\n"
+               "Nota che su Windows moderni verranno probabilmente utilizzate ottimizzazioni a schermo intero indipendentemente, il che nella maggior parte dei casi risulta in prestazioni simili a quelle a schermo intero esclusivo anche quando non è in uso.");
     RTX_OPTION("rtx", std::string, baseGameModRegex, "", "Regex used to determine if the base game is running a mod, like a sourcemod.");
     RTX_OPTION("rtx", std::string, baseGameModPathRegex, "", "Regex used to redirect RTX Remix Runtime to another path for replacements and rtx.conf.");
 
@@ -361,13 +361,13 @@ namespace dxvk {
     RTX_OPTION_ENV("rtx", bool, useReSTIRGI, true, "DXVK_USE_RESTIR_GI",
                    "A flag indicating if ReSTIR GI should be used, true enables ReSTIR GI, false disables it and relies on typical GI sampling.\n"
                    "ReSTIR GI provides improved indirect path sampling over typical importance sampling and should usually be enabled for better indirect diffuse and specular GI quality at the cost of some performance.");
-    RTX_OPTION_ENV("rtx", UpscalerType, upscalerType, UpscalerType::DLSS, "DXVK_UPSCALER_TYPE", "Upscaling boosts performance with varying degrees of image quality tradeoff depending on the type of upscaler and the quality mode/preset.");
+    RTX_OPTION_ENV("rtx", UpscalerType, upscalerType, UpscalerType::DLSS, "DXVK_UPSCALER_TYPE", "Upscaling aumenta le prestazioni con vari gradi di compromesso nella qualità dell'immagine a seconda del tipo di upscaler e della modalità/preset di qualità.");
     RTX_OPTION_ENV("rtx", bool, enableRayReconstruction, true, "DXVK_RAY_RECONSTRUCTION", "Enable ray reconstruction.");
 
     RTX_OPTION("rtx", float, resolutionScale, 0.75f, "");
     RTX_OPTION("rtx", bool, forceCameraJitter, false, "");
     RTX_OPTION("rtx", bool, enableDirectLighting, true, "Enables direct lighting (lighting directly from lights on to a surface) on surfaces when set to true, otherwise disables it.");
-    RTX_OPTION("rtx", bool, enableSecondaryBounces, true, "Enables indirect lighting (lighting from diffuse/specular bounces to one or more other surfaces) on surfaces when set to true, otherwise disables it.");
+    RTX_OPTION("rtx", bool, enableSecondaryBounces, true, "Abilita l'illuminazione indiretta (illuminazione da rimbalzi diffusi/speculari su una o più altre superfici) sulle superfici quando impostato su vero, altrimenti disabilitala.");
     RTX_OPTION("rtx", bool, zUp, false, "Indicates that the Z axis is the \"upward\" axis in the world when true, otherwise the Y axis when false.");
     RTX_OPTION("rtx", bool, leftHandedCoordinateSystem, false, "Indicates that the world space coordinate system is left-handed when true, otherwise right-handed when false.");
     RTX_OPTION("rtx", float, uniqueObjectDistance, 300.f, "The distance (in game units) that an object can move in a single frame before it is no longer considered the same object.\n"
@@ -384,16 +384,16 @@ namespace dxvk {
   public:
     const VirtualKeys& remixMenuKeyBinds() const { return m_remixMenuKeyBinds; }
 
-    RTX_OPTION("rtx", DLSSProfile, qualityDLSS, DLSSProfile::Auto, "Adjusts internal DLSS scaling factor, trades quality for performance.");
+    RTX_OPTION("rtx", DLSSProfile, qualityDLSS, DLSSProfile::Auto, "Regola il fattore di scala DLSS interno, scambia qualità per prestazioni.");
     // Note: All ray tracing modes depend on the rtx.raytraceModePreset option as they may be overridden by automatic defaults for a specific vendor if the preset is set to Auto. Set
     // to Custom to ensure these settings are not overridden.
     //RenderPassVolumeIntegrateRaytraceMode renderPassVolumeIntegrateRaytraceMode = RenderPassVolumeIntegrateRaytraceMode::RayQuery;
     RTX_OPTION_ENV("rtx", RenderPassGBufferRaytraceMode, renderPassGBufferRaytraceMode, RenderPassGBufferRaytraceMode::TraceRay, "DXVK_RENDER_PASS_GBUFFER_RAYTRACE_MODE",
-                   "The ray tracing mode to use for the G-Buffer pass which resolves the initial primary and secondary surfaces to apply lighting to.");
+                   "La modalità di ray tracing da utilizzare per il pass G-Buffer che risolve le superfici primarie e secondarie iniziali per applicare l'illuminazione.");
     RTX_OPTION_ENV("rtx", RenderPassIntegrateDirectRaytraceMode, renderPassIntegrateDirectRaytraceMode, RenderPassIntegrateDirectRaytraceMode::RayQuery, "DXVK_RENDER_PASS_INTEGRATE_DIRECT_RAYTRACE_MODE",
-                   "The ray tracing mode to use for the Direct Lighting pass which applies lighting to the primary/secondary surfaces.");
+                   "La modalità di ray tracing da utilizzare per il pass Direct Lighting che applica l'illuminazione alle superfici primarie/secondarie.");
     RTX_OPTION_ENV("rtx", RenderPassIntegrateIndirectRaytraceMode, renderPassIntegrateIndirectRaytraceMode, RenderPassIntegrateIndirectRaytraceMode::TraceRay, "DXVK_RENDER_PASS_INTEGRATE_INDIRECT_RAYTRACE_MODE",
-                   "The ray tracing mode to use for the Indirect Lighting pass which applies lighting to the primary/secondary surfaces.");
+                   "La modalità di ray tracing da utilizzare per il pass Indirect Lighting che applica l'illuminazione alle superfici primarie/secondarie.");
     RTX_OPTION("rtx", bool, captureDebugImage, false, "");
 
     // Denoiser Options
@@ -409,7 +409,7 @@ namespace dxvk {
                    "or for more accurately comparing subtle effects of potentially biased rendering techniques\n"
                    "which may be hard to see through noise and filtering.\n"
                    "It is also useful for higher quality artistic renders of a scene beyond what is possible in real-time.");
-    RTX_OPTION_ENV("rtx", bool, denoiseDirectAndIndirectLightingSeparately, true, "DXVK_DENOISE_DIRECT_AND_INDIRECT_LIGHTING_SEPARATELY", "Denoising quality, high uses separate denoising of direct and indirect lighting for higher quality at the cost of performance.");
+    RTX_OPTION_ENV("rtx", bool, denoiseDirectAndIndirectLightingSeparately, true, "DXVK_DENOISE_DIRECT_AND_INDIRECT_LIGHTING_SEPARATELY", "Qualità di denoising, alta utilizza il denoising separato di illuminazione diretta e indiretta per una qualità superiore a costo di prestazioni.");
     RTX_OPTION("rtx", bool, replaceDirectSpecularHitTWithIndirectSpecularHitT, true, "");
     RTX_OPTION("rtx", bool, adaptiveResolutionDenoising, true, "");
     RTX_OPTION_ENV("rtx", bool, adaptiveAccumulation, true, "DXVK_USE_ADAPTIVE_ACCUMULATION", "");
@@ -450,61 +450,61 @@ namespace dxvk {
     // Resolve Options
     // Todo: Potentially document that after a number of resolver interactions is exhausted the next interaction will be treated as a hit regardless.
     RTX_OPTION("rtx", uint8_t, primaryRayMaxInteractions, 32,
-               "The maximum number of resolver interactions to use for primary (initial G-Buffer) rays.\n"
-               "This affects how many Decals, Ray Portals and potentially particles (if unordered approximations are not enabled) may be interacted with along a ray at the cost of performance for higher amounts of interactions.");
+               "Il numero massimo di interazioni del resolver da utilizzare per i raggi primari (G-Buffer iniziale).\n"
+               "Questo influisce su quante Decalcomanie, Portali di Raggi e potenzialmente particelle (se non sono abilitate approssimazioni non ordinate) possono interagire lungo un raggio a costo di prestazioni per un numero maggiore di interazioni.");
     RTX_OPTION("rtx", uint8_t, psrRayMaxInteractions, 32,
-               "The maximum number of resolver interactions to use for PSR (primary surface replacement G-Buffer) rays.\n"
-               "This affects how many Decals, Ray Portals and potentially particles (if unordered approximations are not enabled) may be interacted with along a ray at the cost of performance for higher amounts of interactions.");
+               "Il numero massimo di interazioni del resolver da utilizzare per i raggi PSR (sostituzione della superficie primaria del G-Buffer).\n"
+               "Questo influisce su quante Decalcomanie, Portali di Raggi e potenzialmente particelle (se non sono abilitate approssimazioni non ordinate) possono interagire lungo un raggio a costo di prestazioni per un numero maggiore di interazioni.");
     RTX_OPTION("rtx", uint8_t, secondaryRayMaxInteractions, 8,
-               "The maximum number of resolver interactions to use for secondary (indirect) rays.\n"
-               "This affects how many Decals, Ray Portals and potentially particles (if unordered approximations are not enabled) may be interacted with along a ray at the cost of performance for higher amounts of interactions.\n"
-               "This value is recommended to be set lower than the primary/PSR max ray interactions as secondary ray interactions are less visually relevant relative to the performance cost of resolving them.");
+               "Il numero massimo di interazioni del resolver da utilizzare per i raggi secondari (indiretti).\n"
+               "Questo influisce su quante Decalcomanie, Portali di Raggi e potenzialmente particelle (se non sono abilitate approssimazioni non ordinate) possono interagire lungo un raggio a costo di prestazioni per un numero maggiore di interazioni.\n"
+               "Si raccomanda di impostare questo valore più basso rispetto alle interazioni massime dei raggi primari/PSR poiché le interazioni dei raggi secondari sono meno rilevanti visivamente rispetto al costo delle prestazioni per risolverle.");
     RTX_OPTION("rtx", bool, enableSeparateUnorderedApproximations, true,
-               "Use a separate loop during resolving for surfaces which can have lighting evaluated in an approximate unordered way on each path segment (such as particles).\n"
-               "This improves performance typically in how particles or decals are rendered and should usually always be enabled.\n"
-               "Do note however the unordered nature of this resolving method may result in visual artifacts with large numbers of stacked particles due to difficulty in determining the intended order.\n"
-               "Additionally, unordered approximations will only be done on the first indirect ray bounce (as particles matter less in higher bounces), and only if enabled by its corresponding setting.");
-    RTX_OPTION("rtx", bool, trackParticleObjects, true, "Track last frame's corresponding particle object.");
-    RTX_OPTION("rtx", bool, enableDirectTranslucentShadows, false, "Include OBJECT_MASK_TRANSLUCENT into primary visibility rays.");
-    RTX_OPTION("rtx", bool, enableIndirectTranslucentShadows, false, "Include OBJECT_MASK_TRANSLUCENT into secondary visibility rays.");
+               "Usa un ciclo separato durante la risoluzione per superfici che possono avere l'illuminazione valutata in modo approssimativo non ordinato su ogni segmento di percorso (come particelle).\n"
+               "Questo migliora le prestazioni tipicamente nel modo in cui particelle o decalcomanie sono rese e dovrebbe di solito essere sempre abilitato.\n"
+               "Nota tuttavia che la natura non ordinata di questo metodo di risoluzione può risultare in artefatti visivi con un gran numero di particelle sovrapposte a causa della difficoltà nel determinare l'ordine previsto.\n"
+               "Inoltre, le approssimazioni non ordinate verranno eseguite solo sul primo rimbalzo indiretto del raggio (poiché le particelle contano meno nei rimbalzi superiori) e solo se abilitato dalla relativa impostazione.");
+    RTX_OPTION("rtx", bool, trackParticleObjects, true, "Traccia l'oggetto della particella corrispondente al frame precedente.");
+    RTX_OPTION("rtx", bool, enableDirectTranslucentShadows, false, "Includi OBJECT_MASK_TRANSLUCENT nei raggi di visibilità primari.");
+    RTX_OPTION("rtx", bool, enableIndirectTranslucentShadows, false, "Includi OBJECT_MASK_TRANSLUCENT nei raggi di visibilità secondari.");
 
-    RTX_OPTION("rtx", float, resolveTransparencyThreshold, 1.0f / 255.0f, "A threshold for which any opacity value below is considered totally transparent and may be safely skipped without as significant of a performance cost.");
-    RTX_OPTION("rtx", float, resolveOpaquenessThreshold, 254.0f / 255.0f, "A threshold for which any opacity value above is considered totally opaque.");
+    RTX_OPTION("rtx", float, resolveTransparencyThreshold, 1.0f / 255.0f, "Una soglia per cui qualsiasi valore di opacità al di sotto è considerato totalmente trasparente e può essere saltato senza un costo significativo delle prestazioni.");
+    RTX_OPTION("rtx", float, resolveOpaquenessThreshold, 254.0f / 255.0f, "Una soglia per cui qualsiasi valore di opacità al di sopra è considerato totalmente opaco.");
 
     // PSR Options
     RTX_OPTION("rtx", bool, enablePSRR, true,
-               "A flag to enable or disable reflection PSR (Primary Surface Replacement).\n"
-               "When enabled this feature allows higher quality mirror-like reflections in special cases by replacing the G-Buffer's surface with the reflected surface.\n"
-               "Should usually be enabled for the sake of quality as almost all applications will utilize it in the form of glass or mirrors.");
+               "Un flag per abilitare o disabilitare la PSR di riflessione (Sostituzione della Superficie Primaria).\n"
+               "Quando abilitato, questa funzione permette riflessioni di qualità superiore simili a specchi in casi speciali sostituendo la superficie del G-Buffer con la superficie riflessa.\n"
+               "Dovrebbe di solito essere abilitato per il bene della qualità poiché quasi tutte le applicazioni lo utilizzeranno sotto forma di vetro o specchi.");
     RTX_OPTION("rtx", bool, enablePSTR, true,
-               "A flag to enable or disable transmission PSR (Primary Surface Replacement).\n"
-               "When enabled this feature allows higher quality glass-like refraction in special cases by replacing the G-Buffer's surface with the refracted surface.\n"
-               "Should usually be enabled for the sake of quality as almost all applications will utilize it in the form of glass.");
+               "Un flag per abilitare o disabilitare la PSR di trasmissione (Sostituzione della Superficie Primaria).\n"
+               "Quando abilitato, questa funzione permette rifrazioni simili a vetro di qualità superiore in casi speciali sostituendo la superficie del G-Buffer con la superficie rifratta.\n"
+               "Dovrebbe di solito essere abilitato per il bene della qualità poiché quasi tutte le applicazioni lo utilizzeranno sotto forma di vetro.");
     RTX_OPTION("rtx", uint8_t, psrrMaxBounces, 10,
-               "The maximum number of Reflection PSR bounces to traverse. Must be 15 or less due to payload encoding.\n"
-               "Should be set higher when many mirror-like reflection bounces may be needed, though more bounces may come at a higher performance cost.");
+               "Il numero massimo di rimbalzi della PSR di riflessione da attraversare. Deve essere 15 o meno a causa della codifica del payload.\n"
+               "Dovrebbe essere impostato più alto quando sono necessari molti rimbalzi di riflessione simili a specchi, anche se più rimbalzi potrebbero comportare un costo delle prestazioni più elevato.");
     RTX_OPTION("rtx", uint8_t, pstrMaxBounces, 10,
-               "The maximum number of Transmission PSR bounces to traverse. Must be 15 or less due to payload encoding.\n"
-               "Should be set higher when refraction through many layers of glass may be needed, though more bounces may come at a higher performance cost.");
+               "Il numero massimo di rimbalzi della PSR di trasmissione da attraversare. Deve essere 15 o meno a causa della codifica del payload.\n"
+               "Dovrebbe essere impostato più alto quando sono necessari rifrazioni attraverso molti strati di vetro, anche se più rimbalzi potrebbero comportare un costo delle prestazioni più elevato.");
     RTX_OPTION("rtx", bool, enablePSTROutgoingSplitApproximation, true,
-               "Enable transmission PSR on outgoing transmission events such as leaving translucent materials (rather than respecting no-split path PSR rule).\n"
-               "Typically this results in better looking glass when enabled (at the cost of accuracy due to ignoring non-TIR inter-reflections within the glass itself).");
+               "Abilita la PSR di trasmissione su eventi di trasmissione in uscita come lasciare materiali traslucidi (piuttosto che rispettare la regola PSR del percorso senza divisioni).\n"
+               "Tipicamente questo risulta in un vetro dall'aspetto migliore quando abilitato (a costo di precisione a causa dell'ignorare le riflessioni non TIR all'interno del vetro stesso).");
     RTX_OPTION("rtx", bool, enablePSTRSecondaryIncidentSplitApproximation, true,
-               "Enable transmission PSR on secondary incident transmission events such as entering a translucent material on an already-transmitted path (rather than respecting no-split path PSR rule).\n"
-               "Typically this results in better looking glass when enabled (at the cost accuracy due to ignoring reflections off of glass seen through glass for example).");
+               "Abilita la PSR di trasmissione su eventi di trasmissione incidentali secondari come entrare in un materiale traslucido su un percorso già trasmesso (piuttosto che rispettare la regola PSR del percorso senza divisioni).\n"
+               "Tipicamente questo risulta in un vetro dall'aspetto migliore quando abilitato (a costo di precisione a causa dell'ignorare le riflessioni attraverso il vetro, per esempio).");
     
     // Note: In a more technical sense, any PSR reflection or transmission from a surface with "normal detail" greater than the specified value will generate a 1.0 in the
     // disocclusionThresholdMix mask, indicating that the alternate disocclusion threshold in the denoiser should be used.
     // A value of 0 is a valid setting as it means that any detail at all, no matter how small, will set that mask bit (e.g. any usage of a normal map deviating from from the
     // underlying normal).
     RTX_OPTION("rtx", float, psrrNormalDetailThreshold, 0.0f,
-               "A threshold value to indicate that the denoiser's alternate disocclusion threshold should be used when normal map \"detail\" on a reflection PSR surface exceeds a desired amount.\n"
-               "Normal detail is defined as 1-dot(tangent_normal, vec3(0, 0, 1)), or in other words it is 0 when no normal mapping is used, and 1 when the normal mapped normal is perpendicular to the underlying normal.\n"
-               "This is typically used to reduce flickering artifacts resulting from reflection on surfaces like glass leveraging normal maps as often the denoiser is too aggressive with disocclusion checks frame to frame when DLSS or other camera jittering is in use.");
+               "Un valore soglia per indicare che dovrebbe essere utilizzata la soglia di disocclusione alternativa del denoiser quando il \"dettaglio\" della mappa normale su una superficie PSR di riflessione supera una quantità desiderata.\n"
+               "Il dettaglio normale è definito come 1-dot(tangent_normal, vec3(0, 0, 1)), o in altre parole è 0 quando non viene utilizzata mappatura normale, e 1 quando la normale mappata è perpendicolare alla normale sottostante.\n"
+               "Questo è tipicamente utilizzato per ridurre gli artefatti di sfarfallio risultanti dalla riflessione su superfici come il vetro che sfruttano le mappe normali poiché spesso il denoiser è troppo aggressivo con i controlli di disocclusione frame per frame quando si utilizza DLSS o altre jitter della fotocamera.");
     RTX_OPTION("rtx", float, pstrNormalDetailThreshold, 0.0f,
-               "A threshold value to indicate that the denoiser's alternate disocclusion threshold should be used when normal map \"detail\" on a transmission PSR surface exceeds a desired amount.\n"
-               "Normal detail is defined as 1-dot(tangent_normal, vec3(0, 0, 1)), or in other words it is 0 when no normal mapping is used, and 1 when the normal mapped normal is perpendicular to the underlying normal.\n"
-               "This is typically used to reduce flickering artifacts resulting from refraction on surfaces like glass leveraging normal maps as often the denoiser is too aggressive with disocclusion checks frame to frame when DLSS or other camera jittering is in use.");
+               "Un valore soglia per indicare che dovrebbe essere utilizzata la soglia di disocclusione alternativa del denoiser quando il \"dettaglio\" della mappa normale su una superficie PSR di trasmissione supera una quantità desiderata.\n"
+               "Il dettaglio normale è definito come 1-dot(tangent_normal, vec3(0, 0, 1)), o in altre parole è 0 quando non viene utilizzata mappatura normale, e 1 quando la normale mappata è perpendicolare alla normale sottostante.\n"
+               "Questo è tipicamente utilizzato per ridurre gli artefatti di sfarfallio risultanti dalla rifrazione su superfici come il vetro che sfruttano le mappe normali poiché spesso il denoiser è troppo aggressivo con i controlli di disocclusione frame per frame quando si utilizza DLSS o altre jitter della fotocamera.");
 
     // Shader Execution Reordering Options
     RTX_OPTION_ENV("rtx", bool, isShaderExecutionReorderingSupported, true, "DXVK_IS_SHADER_EXECUTION_REORDERING_SUPPORTED", "Enables support of Shader Execution Reordering (SER) if it is supported by the target HW and SW."); 
@@ -513,10 +513,10 @@ namespace dxvk {
 
     // Path Options
     RTX_OPTION("rtx", bool, enableRussianRoulette, true,
-               "A flag to enable or disable Russian Roulette, a rendering technique to give paths a chance of terminating randomly with each bounce based on their importance.\n"
-               "This is usually useful to have enabled as it will ensure useless paths are terminated earlier while more important paths are allowed to accumulate more bounces.\n"
-               "Furthermore this allows for the renderer to remain unbiased whereas a hard clamp on the number of bounces will introduce bias (though this is also done in Remix for the sake of performance).\n"
-               "On the other hand, randomly terminating paths too aggressively may leave threads in GPU warps without work which may hurt thread occupancy when not used with a thread-reordering technique like SER.");
+               "Un flag per abilitare o disabilitare la Roulette Russa, una tecnica di rendering per dare ai percorsi una possibilità di terminare casualmente con ogni rimbalzo basato sulla loro importanza.\n"
+               "Questo è solitamente utile da abilitare poiché garantirà che i percorsi inutili vengano terminati prima mentre i percorsi più importanti possono accumulare più rimbalzi.\n"
+               "Inoltre, questo permette al renderer di rimanere non distorto mentre un limite rigido sul numero di rimbalzi introdurrà bias (sebbene questo sia fatto anche in Remix per il bene delle prestazioni).\n"
+               "D'altra parte, terminare casualmente i percorsi troppo aggressivamente può lasciare thread nei warps della GPU senza lavoro, il che può danneggiare l'occupazione dei thread quando non viene utilizzata con una tecnica di riordino dei thread come SER.");
     RTX_OPTION_ENV("rtx", RussianRouletteMode, russianRouletteMode, RussianRouletteMode::ThroughputBased, "DXVK_PATH_TRACING_RR_MODE","Russian Roulette Mode. Throughput Based: paths with higher throughput become longer; Specular Based: specular paths become longer.\n");
     RTX_OPTION("rtx", float, russianRouletteDiffuseContinueProbability, 0.1f, "The probability of continuing a diffuse path when Russian Roulette is being used. Only apply to specular based mode.\n");
     RTX_OPTION("rtx", float, russianRouletteSpecularContinueProbability, 0.98f, "The probability of continuing a specular path when Russian Roulette is being used. Only apply to specular based mode.\n");
@@ -531,17 +531,17 @@ namespace dxvk {
                "The maximum probability of continuing a path when Russian Roulette is being used on the first bounce.\n"
                "This is similar to the usual max continuation probability for Russian Roulette, but specifically only for the first bounce.");
     RTX_OPTION_ENV("rtx", uint8_t, pathMinBounces, 1, "DXVK_PATH_TRACING_MIN_BOUNCES",
-                   "The minimum number of indirect bounces the path must complete before Russian Roulette can be used. Must be < 16.\n"
-                   "This value is recommended to stay fairly low (1 for example) as forcing longer paths when they carry little contribution quickly becomes detrimental to performance.");
+                   "Il numero minimo di rimbalzi indiretti che il percorso deve completare prima che possa essere utilizzato il Russian Roulette. Deve essere < 16.\n"
+                   "Si consiglia di mantenere questo valore abbastanza basso (1 per esempio) poiché forzare percorsi più lunghi quando apportano poco contributo diventa rapidamente dannoso per le prestazioni.");
     RTX_OPTION_ENV("rtx", uint8_t, pathMaxBounces, 4, "DXVK_PATH_TRACING_MAX_BOUNCES",
-                   "The maximum number of indirect bounces the path will be allowed to complete. Must be < 16.\n"
-                   "Higher values result in better indirect lighting quality due to biasing the signal less, lower values result in better performance.\n"
-                   "Very high values are not recommended however as while long paths may be technically needed for unbiased rendering, in practice the contributions from higher bounces have diminishing returns.");
+                   "Il numero massimo di rimbalzi indiretti che il percorso sarà autorizzato a completare. Deve essere < 16.\n"
+                   "Valori più alti risultano in una migliore qualità dell'illuminazione indiretta dovuto a un minore bias del segnale, valori più bassi risultano in prestazioni migliori.\n"
+                   "Tuttavia, non sono raccomandati valori molto alti poiché, sebbene i percorsi lunghi siano tecnicamente necessari per un rendering non distorto, in pratica i contributi dei rimbalzi più alti hanno rendimenti decrescenti.");
     // Note: Use caution when adjusting any zero thresholds as values too high may cause entire lobes of contribution to be missing in material edge cases. For example
     // with translucency, a zero threshold on the specular lobe of 0.05 removes the entire contribution when viewing straight on for any glass with an IoR below 1.58 or so
     // which can be paticularly noticable in some scenes. To bias sampling more in the favor of one lobe the min probability should be used instead, but be aware this will
     // end up wasting more samples in some cases versus pure importance sampling (but may help denoising if it cannot deal with super sparse signals).
-    RTX_OPTION("rtx", float, opaqueDiffuseLobeSamplingProbabilityZeroThreshold, 0.01f, "The threshold for which to zero opaque diffuse probability weight values.");
+    RTX_OPTION("rtx", float, opaqueDiffuseLobeSamplingProbabilityZeroThreshold, 0.01f, "La soglia per cui azzerare i valori di peso della probabilità diffusa opaca.");
     RTX_OPTION("rtx", float, minOpaqueDiffuseLobeSamplingProbability, 0.25f, "The minimum allowed non-zero value for opaque diffuse probability weights.");
     RTX_OPTION("rtx", float, opaqueSpecularLobeSamplingProbabilityZeroThreshold, 0.01f, "The threshold for which to zero opaque specular probability weight values.");
     RTX_OPTION("rtx", float, minOpaqueSpecularLobeSamplingProbability, 0.25f, "The minimum allowed non-zero value for opaque specular probability weights.");
@@ -562,29 +562,29 @@ namespace dxvk {
                "Prefiltering will overblur detail however compared to the ground truth of casting multiple samples especially given this calculated spread angle is a basic approximation and ray cones to begin with are a simple approximation for ray pixel footprint.\n"
                "As such rather than using the spread angle fully this spread angle factor allows it to be scaled down to something more narrow so that overblurring can be minimized. Similarly, setting this factor to 0 disables this cone angle widening feature.");
     RTX_OPTION("rtx", bool, rngSeedWithFrameIndex, true,
-               "Indicates that pseudo-random number generator should be seeded with the frame number of the application every frame, otherwise seed with 0.\n"
-               "This should generally always be enabled as without the frame index each frame will typically be identical in the random values that are produced which will result in incorrect rendering. Only meant as a debugging tool.");
+               "Indica che il generatore di numeri pseudo-casuali dovrebbe essere inizializzato con il numero di frame dell'applicazione ogni frame, altrimenti inizializzalo con 0.\n"
+               "Questo dovrebbe generalmente essere sempre abilitato poiché senza l'indice del frame ogni frame sarà tipicamente identico nei valori casuali prodotti, il che risulterà in un rendering errato. Inteso solo come strumento di debug.");
     RTX_OPTION("rtx", bool, enableFirstBounceLobeProbabilityDithering, true,
-               "A flag to enable or disable screen-space probability dithering on the first indirect lobe sampled.\n"
-               "Generally sampling a diffuse, specular or other lobe relies on a random number generated against the probability of sampling each lobe, effectively focusing more rays/paths on lobes which matter more.\n"
-               "This can cause issues however with denoisers which do not handle sparse stochastic signals (like those from path tracing) well as they may be expecting a more \"complete\" signal like those used in simpler branching ray tracing setups.\n"
-               "To help solve this issue this option uses a temporal screenspace dithering based on the probability rather than a purely random choice to determine which lobe to sample from on the first indirect bounce.\n"
-               "This as a result helps ensure there will always be a diffuse or specular sample within the dithering pattern's area and should help the denoising resolve a more stable result.");
+               "Un flag per abilitare o disabilitare il dithering della probabilità in screen-space sul primo lobo indiretto campionato.\n"
+               "Generalmente, campionare un lobo diffuso, speculare o altro si basa su un numero casuale generato contro la probabilità di campionare ciascun lobo, focalizzando efficacemente più raggi/percorsi sui lobi che contano di più.\n"
+               "Questo può causare problemi tuttavia con i denoiser che non gestiscono bene i segnali stocastici sparsi (come quelli del path tracing) poiché potrebbero aspettarsi un segnale più \"completo\" come quelli utilizzati in setup di ray tracing a ramificazione più semplici.\n"
+               "Per aiutare a risolvere questo problema, questa opzione utilizza un dithering temporale in screen-space basato sulla probabilità piuttosto che una scelta puramente casuale per determinare quale lobo campionare dal primo rimbalzo indiretto.\n"
+               "Questo, come risultato, aiuta a garantire che ci sarà sempre un campione diffuso o speculare all'interno dell'area del pattern di dithering e dovrebbe aiutare il denoising a risolvere un risultato più stabile.");
     RTX_OPTION("rtx", bool, enableUnorderedResolveInIndirectRays, true,
-               "A flag to enable or disable unordered resolve approximations in indirect rays.\n"
-               "This allows for the presence of unordered approximations in resolving to be overridden in indirect rays and as such requires separate unordered approximations to be enabled to have any effect.\n"
-               "This option should be enabled if objects which can be resolvered in an unordered way in indirect rays are expected for higher quality in reflections, but may come at a performance cost.\n"
-               "Note that even with this option enabled, unordered resolve approximations are only done on the first indirect bounce for the sake of performance overall.");
+               "Un flag per abilitare o disabilitare le approssimazioni di risoluzione non ordinate nei raggi indiretti.\n"
+               "Questo permette di sovrascrivere la presenza di approssimazioni non ordinate nella risoluzione dei raggi indiretti e come tale richiede che siano abilitate approssimazioni non ordinate separate per avere effetto.\n"
+               "Questa opzione dovrebbe essere abilitata se si prevedono oggetti che possono essere risolti in modo non ordinato nei raggi indiretti per una qualità superiore nelle riflessioni, ma può comportare un costo di prestazioni.\n"
+               "Nota che anche con questa opzione abilitata, le approssimazioni di risoluzione non ordinate sono eseguite solo sul primo rimbalzo indiretto per il bene delle prestazioni complessive.");
     RTX_OPTION_ENV("rtx", bool, enableUnorderedEmissiveParticlesInIndirectRays, false, "DXVK_EMISSIVE_INDIRECT_PARTICLES",
-                   "A flag to enable or disable unordered resolve emissive particles specifically in indirect rays.\n"
-                   "Should be enabled in higher quality rendering modes as emissive particles are fairly important in reflections, but may be disabled to skip such interactions which can improve performance on lower end hardware.\n"
-                   "Note that rtx.enableUnorderedResolveInIndirectRays must first be enabled for this option to take any effect (as it will control if unordered resolve is used to begin with in indirect rays).");
+                   "Un flag per abilitare o disabilitare le particelle emissive di risoluzione non ordinate specificamente nei raggi indiretti.\n"
+                   "Dovrebbe essere abilitato nelle modalità di rendering di qualità superiore poiché le particelle emissive sono abbastanza importanti nelle riflessioni, ma possono essere disabilitate per saltare tali interazioni, il che può migliorare le prestazioni su hardware di fascia bassa.\n"
+                   "Nota che rtx.enableUnorderedResolveInIndirectRays deve essere prima abilitato per far sì che questa opzione abbia effetto (poiché controllerà se la risoluzione non ordinata è utilizzata nei raggi indiretti).");
     RTX_OPTION("rtx", bool, enableTransmissionApproximationInIndirectRays, false,
-               "A flag to enable transmission approximations in indirect rays.\n"
-               "Translucent objects hit by indirect rays will not alter ray direction, just change the ray throughput.");
+               "Un flag per abilitare le approssimazioni di trasmissione nei raggi indiretti.\n"
+               "Gli oggetti traslucidi colpiti dai raggi indiretti non altereranno la direzione del raggio, cambieranno solo il throughput del raggio.");
     RTX_OPTION("rtx", bool, enableDecalMaterialBlending, true,
-               "A flag to enable or disable material blending on decals.\n"
-               "This should generally always be enabled when decals are in use as this allows decals to be blended down on to the surface they sit slightly above which results in more convincing decals rendering.");
+               "Un flag per abilitare o disabilitare il blending dei materiali sulle decalcomanie.\n"
+               "Questo dovrebbe generalmente essere sempre abilitato quando le decalcomanie sono in uso poiché permette alle decalcomanie di essere amalgamate alla superficie su cui si trovano leggermente sopra, il che risulta in una resa più convincente delle decalcomanie.");
 
     RTX_OPTION("rtx", bool, enableBillboardOrientationCorrection, true, "");
     RTX_OPTION("rtx", bool, useIntersectionBillboardsOnPrimaryRays, false, "");
@@ -641,8 +641,8 @@ namespace dxvk {
     RTX_OPTION("rtx", float, froxelReservoirSamplesStabilityHistoryPower, 2.0f, "The power to apply to the Reservoir sample stability history weight.");
     RTX_OPTION("rtx", float, froxelKernelRadiusStabilityHistoryPower, 2.0f, "The power to apply to the kernel radius stability history weight.");
     RTX_OPTION("rtx", bool, enableVolumetricLighting, false,
-               "Enabling volumetric lighting provides higher quality ray traced physical volumetrics, disabling falls back to cheaper depth based fog.\n"
-               "Note that disabling this option does not disable the froxel radiance cache as a whole as it is still needed for other non-volumetric lighting approximations.");
+               "Abilitare l'illuminazione volumetrica fornisce volumetrici fisici ray traced di qualità superiore, disabilitare torna alla nebbia basata sulla profondità più economica.\n"
+               "Nota che disabilitare questa opzione non disabilita la cache di radiance froxel come un tutto poiché è ancora necessaria per altre approssimazioni di illuminazione non volumetrica.");
     RTX_OPTION("rtx", Vector3, volumetricTransmittanceColor, Vector3(0.953237f, 0.928790f, 0.903545f),
                "The color to use for calculating transmittance measured at a specific distance.\n"
                "Note that this color is assumed to be in sRGB space and gamma encoded as it will be converted to linear for use in volumetrics.");
@@ -655,7 +655,7 @@ namespace dxvk {
                "Enables using extra frustum-aligned volumes for lighting in portals.\n"
                "Note that enabling this option will require 3x the memory of the typical froxel grid as well as degrade performance in some cases.\n"
                "This option should be enabled always in games using ray portals for proper looking volumetrics through them, but should be disabled on any game not using ray portals.\n"
-               "Additionally, this setting must be set at startup and changing it will not take effect at runtime.");
+               "Inoltre, questa impostazione deve essere impostata all'avvio e cambiarla non avrà effetto durante l'esecuzione.");
 
     // Subsurface Scattering
     struct SubsurfaceScattering {
@@ -749,7 +749,7 @@ namespace dxvk {
                "The threshold to use for camera \"in-between\" ray portal detection in meters.\n"
                "When the camera is less than this distance behind the surface of a ray portal it will be pushed backwards to stay behind the ray portal.\n"
                "This value should stay small but be large enough to cover the gap between ray portals and the geometry behind them (if such a gap exists in the underlying application).\n"
-               "Additionally, this setting must be set at startup and changing it will not take effect at runtime.");
+               "Inoltre, questa impostazione deve essere impostata all'avvio e cambiarla non avrà effetto durante l'esecuzione.");
 
     RTX_OPTION_ENV("rtx", bool, useWhiteMaterialMode, false, "RTX_USE_WHITE_MATERIAL_MODE", "Override all objects' materials by white material");
     RTX_OPTION("rtx", bool, useHighlightLegacyMode, false, "");
@@ -801,42 +801,42 @@ namespace dxvk {
     } opacityMicromap;
 
     RTX_OPTION("rtx", ReflexMode, reflexMode, ReflexMode::LowLatency,
-               "Reflex mode selection, enabling it helps minimize input latency, boost mode may further reduce latency by boosting GPU clocks in CPU-bound cases.\n"
-               "Supported enum values are 0 = None (Disabled), 1 = LowLatency (Enabled), 2 = LowLatencyBoost (Enabled + Boost).\n"
-               "Note that even when using the \"None\" Reflex mode Reflex will attempt to be initialized. Use rtx.isReflexEnabled to fully disable to skip this initialization if needed.");
+               "Selezione della modalità Reflex, abilitarla aiuta a minimizzare la latenza di input, la modalità boost può ridurre ulteriormente la latenza aumentando le frequenze della GPU nei casi limitati dalla CPU.\n"
+               "I valori enum supportati sono 0 = Nessuno (Disabilitato), 1 = BassaLatenza (Abilitato), 2 = BassaLatenzaBoost (Abilitato + Boost).\n"
+               "Nota che anche utilizzando la modalità Reflex \"Nessuno\", Reflex tenterà di essere inizializzato. Usa rtx.isReflexEnabled per disabilitarlo completamente per saltare questa inizializzazione se necessario.");
     RTX_OPTION_FLAG("rtx", bool, isReflexEnabled, true, RtxOptionFlags::NoSave,
                     "Enables or disables Reflex globally.\n"
                     "Note that this option when set to false will prevent Reflex from even attempting to initialize, unlike setting the Reflex mode to \"None\" which simply tells an initialized Reflex not to take effect.\n"
-                    "Additionally, this setting must be set at startup and changing it will not take effect at runtime.");
+                    "Inoltre, questa impostazione deve essere impostata all'avvio e cambiarla non avrà effetto durante l'esecuzione.");
 
     RW_RTX_OPTION_FLAG("rtx", EnableVsync, enableVsync, EnableVsync::WaitingForImplicitSwapchain, RtxOptionFlags::NoSave, "Controls the game's V-Sync setting. Native game's V-Sync settings are ignored.");
 
     // Replacement options
-    RTX_OPTION("rtx", bool, enableReplacementAssets, true, "Globally enables or disables all enhanced asset replacement (materials, meshes, lights) functionality.");
+    RTX_OPTION("rtx", bool, enableReplacementAssets, true, "Abilita o disabilita globalmente tutte le funzionalità di sostituzione degli asset avanzati (materiali, mesh, luci).");
     RTX_OPTION("rtx", bool, enableReplacementLights, true,
-               "Enables or disables enhanced light replacements.\n"
-               "Requires replacement assets in general to be enabled to have any effect.");
+               "Abilita o disabilita le sostituzioni delle luci avanzate.\n"
+               "Richiede che gli asset di sostituzione in generale siano abilitati per avere effetto.");
     RTX_OPTION("rtx", bool, enableReplacementMeshes, true,
-               "Enables or disables enhanced mesh replacements.\n"
-               "Requires replacement assets in general to be enabled to have any effect.");
+               "Abilita o disabilita le sostituzioni delle mesh avanzate.\n"
+               "Richiede che gli asset di sostituzione in generale siano abilitati per avere effetto.");
     RTX_OPTION("rtx", bool, enableReplacementMaterials, true,
-               "Enables or disables enhanced material replacements.\n"
-               "Requires replacement assets in general to be enabled to have any effect.");
+               "Abilita o disabilita le sostituzioni dei materiali avanzate.\n"
+               "Richiede che gli asset di sostituzione in generale siano abilitati per avere effetto.");
     RTX_OPTION("rtx", bool, forceHighResolutionReplacementTextures, false,
                "A flag to enable or disable forcing high resolution replacement textures.\n"
                "When enabled this mode overrides all other methods of mip calculation (adaptive resolution and the minimum mipmap level) and forces it to be 0 to always load in the highest quality of textures.\n"
                "This generally should not be used other than for various forms of debugging or visual comparisons as this mode will ignore any constraints on CPU or GPU memory which may starve the system or Remix of memory.\n"
-               "Additionally, this setting must be set at startup and changing it will not take effect at runtime.");
+               "Inoltre, questa impostazione deve essere impostata all'avvio e cambiarla non avrà effetto durante l'esecuzione.");
     RTX_OPTION("rtx", bool, enableAdaptiveResolutionReplacementTextures, true,
                "A flag to enable or disable adaptive resolution replacement textures.\n"
                "When enabled, this mode allows replacement textures to load in only up to an adaptive minimum mip level to cut down on memory usage, but only when force high resolution replacement textures is disabled.\n"
                "This should generally always be enabled to ensure Remix does not starve the system of CPU or GPU memory while loading textures.\n"
-               "Additionally, this setting must be set at startup and changing it will not take effect at runtime.");
+               "Inoltre, questa impostazione deve essere impostata all'avvio e cambiarla non avrà effetto durante l'esecuzione.");
     RTX_OPTION("rtx", uint, minReplacementTextureMipMapLevel, 0,
-               "A parameter controlling the minimum replacement texture mipmap level to use, higher values will lower texture quality, 0 for default behavior of effectively not enforcing a minimum.\n"
-               "This minimum will always be considered as long as force high resolution replacement textures is not enabled, meaning that with or without adaptive resolution replacement textures enabled this setting will always enforce a minimum mipmap restriction.\n"
-               "Generally this should be changed to reduce the texture quality globally if desired to reduce CPU and GPU memory usage and typically should be controlled by some sort of texture quality setting.\n"
-               "Additionally, this setting must be set at startup and changing it will not take effect at runtime.");
+               "Un parametro che controlla il livello mipmap minimo della texture di sostituzione da utilizzare, valori più alti ridurranno la qualità delle texture, 0 per il comportamento predefinito di non imporre effettivamente un minimo.\n"
+               "Questo minimo sarà sempre considerato fintanto che la sostituzione delle texture ad alta risoluzione forzata non è abilitata, il che significa che con o senza la sostituzione delle texture a risoluzione adattiva abilitata, questa impostazione imporrà sempre una restrizione minima di mipmap.\n"
+               "Generalmente questo dovrebbe essere cambiato per ridurre la qualità delle texture globalmente se si desidera ridurre l'uso della memoria della CPU e GPU e in genere dovrebbe essere controllato da una sorta di impostazione della qualità delle texture.\n"
+               "Inoltre, questa impostazione deve essere impostata all'avvio e cambiarla non avrà effetto durante l'esecuzione.");
     RTX_OPTION("rtx", uint, adaptiveResolutionReservedGPUMemoryGiB, 2,
                "The amount of GPU memory in gibibytes to reserve away from consideration for adaptive resolution replacement textures.\n"
                "This value should only be changed to reflect the estimated amount of memory Remix itself consumes on the GPU (aside from texture loading, mostly from rendering-related buffers) and should not be changed otherwise.\n"

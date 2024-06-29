@@ -852,7 +852,7 @@ namespace dxvk {
     if (ImGui::Button("Save Settings")) {
       RtxOptions::Get()->serialize();
     }
-    ImGui::SetTooltipToLastWidgetOnHover("This will save above settings in the rtx.conf file. Some may only take effect on next launch.");
+    ImGui::SetTooltipToLastWidgetOnHover("Questo salverà le impostazioni sopra nel file rtx.conf. Alcune potrebbero avere effetto solo al prossimo avvio.");
 
     ImGui::SameLine();
     if (ImGui::Button("Reset Settings")) {
@@ -957,7 +957,7 @@ namespace dxvk {
         m_userGraphicsSettingChanged = false;
       }
 
-      ImGui::SetTooltipToLastWidgetOnHover("This will save above settings in the rtx.conf file. Some may only take effect on next launch.");
+      ImGui::SetTooltipToLastWidgetOnHover("Questo salverà le impostazioni sopra nel file rtx.conf. Alcune potrebbero avere effetto solo al prossimo avvio.");
 
       ImGui::SameLine();
 
@@ -1008,7 +1008,7 @@ namespace dxvk {
 
     // Note: Specifically reference the DLSS preset when present.
     if (dlssSupported) {
-      tabDescriptionText = "General performance settings. Enabling the DLSS preset is recommended to significantly increase performance.";
+      tabDescriptionText = "Impostazioni generali delle prestazioni. Si consiglia di abilitare il preset DLSS per aumentare significativamente le prestazioni.";
     }
 
     ImGui::TextWrapped(tabDescriptionText);
@@ -1167,7 +1167,7 @@ namespace dxvk {
 
     // Describe the tab
 
-    ImGui::TextWrapped("Rendering-specific settings. Complexity of rendering may be adjusted to balance between performance and quality.");
+    ImGui::TextWrapped("Impostazioni specifiche per il rendering. La complessità del rendering può essere regolata per bilanciare tra prestazioni e qualità.");
 
     ImGui::Dummy(ImVec2(0.0f, 5.0f));
 
@@ -1229,7 +1229,7 @@ namespace dxvk {
       
       m_userGraphicsSettingChanged |= textureQualityCombo.getKey(&RtxOptions::Get()->minReplacementTextureMipMapLevelObject());
       m_userGraphicsSettingChanged |= indirectLightingParticlesCombo.getKey(&indirectLightParticlesLevel);
-      ImGui::SetTooltipToLastWidgetOnHover("Controls the quality of particles in indirect (reflection/GI) rays.");
+      ImGui::SetTooltipToLastWidgetOnHover("Controlla la qualità delle particelle nei raggi indiretti (riflessione/GI).");
 
       ImGui::EndDisabled();
     }
@@ -1300,7 +1300,7 @@ namespace dxvk {
 
     // Describe the tab
 
-    ImGui::TextWrapped("Content-specific settings. Allows control of what types of assets Remix should replace (if any).");
+    ImGui::TextWrapped("Impostazioni specifiche del contenuto. Permette di controllare quali tipi di asset Remix dovrebbe sostituire (se presenti).");
 
     ImGui::Dummy(ImVec2(0.0f, 5.0f));
 
@@ -2270,13 +2270,13 @@ namespace dxvk {
 
     ImGui::BeginDisabled();
     ImGui::Indent();
-    ImGui::TextWrapped("This setting overrides the native game's V-Sync setting.");
+    ImGui::TextWrapped("Questa impostazione sostituisce l'impostazione V-Sync del gioco nativo.");
     ImGui::Unindent();
     ImGui::EndDisabled();
     
     if (enableDLFGGuard && DxvkDLFG::enable()) {
       ImGui::Indent();
-      ImGui::TextWrapped("When Frame Generation is active, V-Sync is automatically disabled.");
+      ImGui::TextWrapped("Quando la generazione di frame è attiva, V-Sync è automaticamente disabilitato.");
       ImGui::Unindent();
 
       ImGui::EndDisabled();
@@ -2478,7 +2478,7 @@ namespace dxvk {
     ImGui::PushItemWidth(200);
     auto common = ctx->getCommonObjects();
 
-    ImGui::Text("Disclaimer: The following settings are intended for developers,\nchanging them may introduce instability.");
+    ImGui::Text("Disclaimer: Le seguenti impostazioni sono destinate agli sviluppatori,\nmodificarle può introdurre instabilità.");
     ImGui::Separator();
 
     // Always display memory stats to user.

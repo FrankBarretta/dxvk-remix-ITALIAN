@@ -40,8 +40,8 @@
 
 namespace dxvk {
   struct LightManagerGuiSettings {
-    RW_RTX_OPTION_FLAG("rtx.lights", bool, enableDebugMode, false, RtxOptionFlags::NoSave, "Enables light debug visualization.");
-    RW_RTX_OPTION_FLAG("rtx.lights", bool, debugDrawLightHashes, false, RtxOptionFlags::NoSave, "Draw light hashes of all visible ob screen lights, when enableDebugMode=true.");
+    RW_RTX_OPTION_FLAG("rtx.lights", bool, enableDebugMode, false, RtxOptionFlags::NoSave, "Abilita la visualizzazione di debug delle luci.");
+    RW_RTX_OPTION_FLAG("rtx.lights", bool, debugDrawLightHashes, false, RtxOptionFlags::NoSave, "Disegna gli hash delle luci di tutte le luci visibili sullo schermo, quando enableDebugMode=true.");
   };
 
   ImGui::ComboWithKey<LightManager::FallbackLightMode> fallbackLightModeCombo {

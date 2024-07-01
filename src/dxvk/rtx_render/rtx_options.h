@@ -276,7 +276,7 @@ namespace dxvk {
     RTX_OPTION_ENV("rtx", std::string, sourceRootPath, "", "RTX_SOURCE_ROOT", "A path pointing at the root folder of the project, used to override the path to the root of the project generated at build-time (as this path is only valid for the machine the project was originally compiled on). Used primarily for locating shader source files for runtime shader recompilation.");
     RTX_OPTION("rtx", bool,  recompileShadersOnLaunch, false, "When set to true runtime shader recompilation will execute on the first frame after launch.");
     RTX_OPTION("rtx", bool, useLiveShaderEditMode, false, "When set to true shaders will be automatically recompiled when any shader file is updated (saved for instance) in addition to the usual manual recompilation trigger.");
-    RTX_OPTION("rtx", float, emissiveIntensity, 1.0f, "A general scale factor on all emissive intensity values globally. Generally per-material emissive intensities should be used, but this option may be useful for debugging without needing to author materials.");
+    RTX_OPTION("rtx", float, emissiveIntensity, 1.0f, "Un fattore di scala generale su tutti i valori di intensità emissiva globalmente. Generalmente dovrebbero essere utilizzate le intensità emissive per materiale, ma questa opzione può essere utile per il debugging senza dover creare materiali.");
     RTX_OPTION("rtx", float, fireflyFilteringLuminanceThreshold, 1000.0f, "Soglia massima di luminanza per il clamping del filtraggio delle firefly.");
     RTX_OPTION("rtx", float, secondarySpecularFireflyFilteringThreshold, 1000.0f, "Soglia di clamping della luminanza delle firefly per il segnale speculare secondario.");
     RTX_OPTION("rtx", float, vertexColorStrength, 0.6f,
@@ -356,17 +356,17 @@ namespace dxvk {
     RTX_OPTION("rtx", bool, enablePortalFadeInEffect, false, "");
 
     RTX_OPTION_ENV("rtx", bool, useRTXDI, true, "DXVK_USE_RTXDI",
-                   "A flag indicating if RTXDI should be used, true enables RTXDI, false disables it and falls back on simpler light sampling methods.\n"
-                   "RTXDI provides improved direct light sampling quality over traditional methods and should generally be enabled for improved direct lighting quality at the cost of some performance.");
+                   "Un flag che indica se RTXDI deve essere utilizzato, true abilita RTXDI, false lo disabilita e ricade su metodi di campionamento della luce più semplici.\n"
+                   "RTXDI fornisce una qualità di campionamento della luce diretta migliorata rispetto ai metodi tradizionali e dovrebbe generalmente essere abilitato per una migliore qualità di illuminazione diretta a costo di alcune prestazioni.");
     RTX_OPTION_ENV("rtx", bool, useReSTIRGI, true, "DXVK_USE_RESTIR_GI",
-                   "A flag indicating if ReSTIR GI should be used, true enables ReSTIR GI, false disables it and relies on typical GI sampling.\n"
-                   "ReSTIR GI provides improved indirect path sampling over typical importance sampling and should usually be enabled for better indirect diffuse and specular GI quality at the cost of some performance.");
+                   "Un flag che indica se ReSTIR GI deve essere utilizzato, true abilita ReSTIR GI, false lo disabilita e si basa sul tipico campionamento GI.\n"
+                   "ReSTIR GI fornisce un campionamento del percorso indiretto migliorato rispetto al tipico campionamento di importanza e dovrebbe di solito essere abilitato per una migliore qualità GI diffusa e speculare indiretta a costo di alcune prestazioni.");
     RTX_OPTION_ENV("rtx", UpscalerType, upscalerType, UpscalerType::DLSS, "DXVK_UPSCALER_TYPE", "Upscaling aumenta le prestazioni con vari gradi di compromesso nella qualità dell'immagine a seconda del tipo di upscaler e della modalità/preset di qualità.");
     RTX_OPTION_ENV("rtx", bool, enableRayReconstruction, true, "DXVK_RAY_RECONSTRUCTION", "Enable ray reconstruction.");
 
     RTX_OPTION("rtx", float, resolutionScale, 0.75f, "");
     RTX_OPTION("rtx", bool, forceCameraJitter, false, "");
-    RTX_OPTION("rtx", bool, enableDirectLighting, true, "Enables direct lighting (lighting directly from lights on to a surface) on surfaces when set to true, otherwise disables it.");
+    RTX_OPTION("rtx", bool, enableDirectLighting, true, "Abilita l'illuminazione diretta (illuminazione direttamente dalle luci su una superficie) sulle superfici quando impostato su true, altrimenti la disabilita.");
     RTX_OPTION("rtx", bool, enableSecondaryBounces, true, "Abilita l'illuminazione indiretta (illuminazione da rimbalzi diffusi/speculari su una o più altre superfici) sulle superfici quando impostato su vero, altrimenti disabilitala.");
     RTX_OPTION("rtx", bool, zUp, false, "Indicates that the Z axis is the \"upward\" axis in the world when true, otherwise the Y axis when false.");
     RTX_OPTION("rtx", bool, leftHandedCoordinateSystem, false, "Indicates that the world space coordinate system is left-handed when true, otherwise right-handed when false.");
@@ -509,7 +509,7 @@ namespace dxvk {
     // Shader Execution Reordering Options
     RTX_OPTION_ENV("rtx", bool, isShaderExecutionReorderingSupported, true, "DXVK_IS_SHADER_EXECUTION_REORDERING_SUPPORTED", "Enables support of Shader Execution Reordering (SER) if it is supported by the target HW and SW."); 
     RTX_OPTION("rtx", bool, enableShaderExecutionReorderingInPathtracerGbuffer, false, "(Note: Hard disabled in shader code) Enables Shader Execution Reordering (SER) in GBuffer Raytrace pass if SER is supported.");
-    RTX_OPTION("rtx", bool, enableShaderExecutionReorderingInPathtracerIntegrateIndirect, true, "Enables Shader Execution Reordering (SER) in Integrate Indirect pass if SER is supported.");
+    RTX_OPTION("rtx", bool, enableShaderExecutionReorderingInPathtracerIntegrateIndirect, true, "Abilita il Shader Execution Reordering (SER) nel passaggio Integrate Indirect se SER è supportato.");
 
     // Path Options
     RTX_OPTION("rtx", bool, enableRussianRoulette, true,
@@ -517,19 +517,19 @@ namespace dxvk {
                "Questo è solitamente utile da abilitare poiché garantirà che i percorsi inutili vengano terminati prima mentre i percorsi più importanti possono accumulare più rimbalzi.\n"
                "Inoltre, questo permette al renderer di rimanere non distorto mentre un limite rigido sul numero di rimbalzi introdurrà bias (sebbene questo sia fatto anche in Remix per il bene delle prestazioni).\n"
                "D'altra parte, terminare casualmente i percorsi troppo aggressivamente può lasciare thread nei warps della GPU senza lavoro, il che può danneggiare l'occupazione dei thread quando non viene utilizzata con una tecnica di riordino dei thread come SER.");
-    RTX_OPTION_ENV("rtx", RussianRouletteMode, russianRouletteMode, RussianRouletteMode::ThroughputBased, "DXVK_PATH_TRACING_RR_MODE","Russian Roulette Mode. Throughput Based: paths with higher throughput become longer; Specular Based: specular paths become longer.\n");
-    RTX_OPTION("rtx", float, russianRouletteDiffuseContinueProbability, 0.1f, "The probability of continuing a diffuse path when Russian Roulette is being used. Only apply to specular based mode.\n");
-    RTX_OPTION("rtx", float, russianRouletteSpecularContinueProbability, 0.98f, "The probability of continuing a specular path when Russian Roulette is being used. Only apply to specular based mode.\n");
-    RTX_OPTION("rtx", float, russianRouletteDistanceFactor, 0.1f, "Path segments whose distance proportion are under this threshold are more likely to continue. Only apply to specular based mode.\n");
+    RTX_OPTION_ENV("rtx", RussianRouletteMode, russianRouletteMode, RussianRouletteMode::ThroughputBased, "DXVK_PATH_TRACING_RR_MODE","Modalità Roulette Russa. Basata sul throughput: i percorsi con throughput più alto diventano più lunghi; Basata sullo speculare: i percorsi speculari diventano più lunghi.\n");
+    RTX_OPTION("rtx", float, russianRouletteDiffuseContinueProbability, 0.1f, "La probabilità di continuare un percorso diffuso quando viene utilizzata la Roulette Russa. Si applica solo alla modalità basata sullo speculare.\n");
+    RTX_OPTION("rtx", float, russianRouletteSpecularContinueProbability, 0.98f, "La probabilità di continuare un percorso speculare quando viene utilizzata la Roulette Russa. Si applica solo alla modalità basata sullo speculare.\n");
+    RTX_OPTION("rtx", float, russianRouletteDistanceFactor, 0.1f, "I segmenti di percorso la cui proporzione di distanza è inferiore a questa soglia hanno più probabilità di continuare. Si applica solo alla modalità basata sullo speculare.\n");
     RTX_OPTION("rtx", float, russianRouletteMaxContinueProbability, 0.9f,
                "The maximum probability of continuing a path when Russian Roulette is being used.\n"
                "This ensures all rays have a small probability of terminating each bounce, mostly to prevent infinite paths in perfectly reflective mirror rooms (though the maximum path bounce count will also ensure this).");
     RTX_OPTION("rtx", float, russianRoulette1stBounceMinContinueProbability, 0.6f,
-               "The minimum probability of continuing a path when Russian Roulette is being used on the first bounce.\n"
-               "This ensures that on the first bounce rays are not terminated too aggressively as it may be useful for some denoisers to have a contribution even if it is a relatively unimportant one rather than a missing indirect sample.");
+               "La probabilità minima di continuare un percorso quando viene utilizzata la Roulette Russa sul primo rimbalzo.\n"
+               "Ciò garantisce che al primo rimbalzo i raggi non vengano terminati troppo aggressivamente, poiché potrebbe essere utile per alcuni denoiser avere un contributo anche se relativamente poco importante piuttosto che un campione indiretto mancante.");
     RTX_OPTION("rtx", float, russianRoulette1stBounceMaxContinueProbability, 1.0f,
-               "The maximum probability of continuing a path when Russian Roulette is being used on the first bounce.\n"
-               "This is similar to the usual max continuation probability for Russian Roulette, but specifically only for the first bounce.");
+               "La probabilità massima di continuare un percorso quando viene utilizzata la Roulette Russa sul primo rimbalzo.\n"
+               "Questo è simile alla solita probabilità massima di continuazione per la Roulette Russa, ma specificamente solo per il primo rimbalzo.");
     RTX_OPTION_ENV("rtx", uint8_t, pathMinBounces, 1, "DXVK_PATH_TRACING_MIN_BOUNCES",
                    "Il numero minimo di rimbalzi indiretti che il percorso deve completare prima che possa essere utilizzato il Russian Roulette. Deve essere < 16.\n"
                    "Si consiglia di mantenere questo valore abbastanza basso (1 per esempio) poiché forzare percorsi più lunghi quando apportano poco contributo diventa rapidamente dannoso per le prestazioni.");
@@ -542,25 +542,25 @@ namespace dxvk {
     // which can be paticularly noticable in some scenes. To bias sampling more in the favor of one lobe the min probability should be used instead, but be aware this will
     // end up wasting more samples in some cases versus pure importance sampling (but may help denoising if it cannot deal with super sparse signals).
     RTX_OPTION("rtx", float, opaqueDiffuseLobeSamplingProbabilityZeroThreshold, 0.01f, "La soglia per cui azzerare i valori di peso della probabilità diffusa opaca.");
-    RTX_OPTION("rtx", float, minOpaqueDiffuseLobeSamplingProbability, 0.25f, "The minimum allowed non-zero value for opaque diffuse probability weights.");
-    RTX_OPTION("rtx", float, opaqueSpecularLobeSamplingProbabilityZeroThreshold, 0.01f, "The threshold for which to zero opaque specular probability weight values.");
-    RTX_OPTION("rtx", float, minOpaqueSpecularLobeSamplingProbability, 0.25f, "The minimum allowed non-zero value for opaque specular probability weights.");
-    RTX_OPTION("rtx", float, opaqueOpacityTransmissionLobeSamplingProbabilityZeroThreshold, 0.01f, "The threshold for which to zero opaque opacity probability weight values.");
-    RTX_OPTION("rtx", float, minOpaqueOpacityTransmissionLobeSamplingProbability, 0.25f, "The minimum allowed non-zero value for opaque opacity probability weights.");
-    RTX_OPTION("rtx", float, opaqueDiffuseTransmissionLobeSamplingProbabilityZeroThreshold, 0.01f, "The threshold for which to zero thin opaque diffuse transmission probability weight values.");
-    RTX_OPTION("rtx", float, minOpaqueDiffuseTransmissionLobeSamplingProbability, 0.25f, "The minimum allowed non-zero value for thin opaque diffuse transmission probability weights.");
+    RTX_OPTION("rtx", float, minOpaqueDiffuseLobeSamplingProbability, 0.25f, "Il valore minimo non nullo consentito per i pesi di probabilità diffusa opaca.");
+    RTX_OPTION("rtx", float, opaqueSpecularLobeSamplingProbabilityZeroThreshold, 0.01f, "La soglia per azzerare i valori dei pesi di probabilità speculare opaca.");
+    RTX_OPTION("rtx", float, minOpaqueSpecularLobeSamplingProbability, 0.25f, "Il valore minimo non nullo consentito per i pesi di probabilità speculare opaca.");
+    RTX_OPTION("rtx", float, opaqueOpacityTransmissionLobeSamplingProbabilityZeroThreshold, 0.01f, "La soglia per azzerare i valori dei pesi di probabilità di opacità opaca.");
+    RTX_OPTION("rtx", float, minOpaqueOpacityTransmissionLobeSamplingProbability, 0.25f, "Il valore minimo non nullo consentito per i pesi di probabilità di opacità opaca.");
+    RTX_OPTION("rtx", float, opaqueDiffuseTransmissionLobeSamplingProbabilityZeroThreshold, 0.01f, "La soglia per azzerare i valori dei pesi di probabilità di trasmissione diffusa opaca sottile.");
+    RTX_OPTION("rtx", float, minOpaqueDiffuseTransmissionLobeSamplingProbability, 0.25f, "Il valore minimo non nullo consentito per i pesi di probabilità di trasmissione diffusa opaca sottile.");
     // Note: 0.01 chosen as mentioned before to avoid cutting off reflection lobe on most common types of glass when looking straight on (a base reflectivity
     // of 0.01 corresponds to an IoR of 1.22 or so). Avoid changing this default without good reason to prevent glass from losing its reflection contribution.
-    RTX_OPTION("rtx", float, translucentSpecularLobeSamplingProbabilityZeroThreshold, 0.01f, "The threshold for which to zero translucent specular probability weight values.");
-    RTX_OPTION("rtx", float, minTranslucentSpecularLobeSamplingProbability, 0.3f, "The minimum allowed non-zero value for translucent specular probability weights.");
-    RTX_OPTION("rtx", float, translucentTransmissionLobeSamplingProbabilityZeroThreshold, 0.01f, "The threshold for which to zero translucent transmission probability weight values.");
-    RTX_OPTION("rtx", float, minTranslucentTransmissionLobeSamplingProbability, 0.25f, "The minimum allowed non-zero value for translucent transmission probability weights.");
+    RTX_OPTION("rtx", float, translucentSpecularLobeSamplingProbabilityZeroThreshold, 0.01f, "La soglia per azzerare i valori dei pesi di probabilità speculare traslucida.");
+    RTX_OPTION("rtx", float, minTranslucentSpecularLobeSamplingProbability, 0.3f, "Il valore minimo non nullo consentito per i pesi di probabilità speculare traslucida.");
+    RTX_OPTION("rtx", float, translucentTransmissionLobeSamplingProbabilityZeroThreshold, 0.01f, "La soglia per azzerare i valori dei pesi di probabilità di trasmissione traslucida.");
+    RTX_OPTION("rtx", float, minTranslucentTransmissionLobeSamplingProbability, 0.25f, "Il valore minimo non nullo consentito per i pesi di probabilità di trasmissione traslucida.");
 
     RTX_OPTION("rtx", float, indirectRaySpreadAngleFactor, 0.05f,
-               "A tuning factor applied to the spread angle calculated from the sampled lobe solid angle PDF. Should be 0-1.\n"
-               "This scaled spread angle is used to widen a ray's cone angle after indirect lighting BRDF samples to essentially prefilter the effects of the BRDF lobe's spread which potentially may reduce noise from indirect rays (e.g. reflections).\n"
-               "Prefiltering will overblur detail however compared to the ground truth of casting multiple samples especially given this calculated spread angle is a basic approximation and ray cones to begin with are a simple approximation for ray pixel footprint.\n"
-               "As such rather than using the spread angle fully this spread angle factor allows it to be scaled down to something more narrow so that overblurring can be minimized. Similarly, setting this factor to 0 disables this cone angle widening feature.");
+               "Un fattore di regolazione applicato all'angolo di diffusione calcolato dal PDF dell'angolo solido del lobo campionato. Dovrebbe essere 0-1.\n"
+               "Questo angolo di diffusione scalato viene utilizzato per allargare l'angolo del cono di un raggio dopo i campioni BRDF di illuminazione indiretta per pre-filtrare essenzialmente gli effetti della diffusione del lobo BRDF che potenzialmente può ridurre il rumore dai raggi indiretti (ad es. riflessioni).\n"
+               "Il pre-filtraggio sfocherà eccessivamente i dettagli rispetto alla verità del lancio di più campioni, specialmente considerando che questo angolo di diffusione calcolato è un'approssimazione di base e i coni dei raggi sono già di per sé un'approssimazione semplice per l'impronta del pixel del raggio.\n"
+               "Pertanto, invece di utilizzare completamente l'angolo di diffusione, questo fattore dell'angolo di diffusione permette di ridurlo a qualcosa di più stretto in modo da minimizzare la sfocatura eccessiva. Allo stesso modo, impostare questo fattore a 0 disabilita questa funzione di allargamento dell'angolo del cono.");
     RTX_OPTION("rtx", bool, rngSeedWithFrameIndex, true,
                "Indica che il generatore di numeri pseudo-casuali dovrebbe essere inizializzato con il numero di frame dell'applicazione ogni frame, altrimenti inizializzalo con 0.\n"
                "Questo dovrebbe generalmente essere sempre abilitato poiché senza l'indice del frame ogni frame sarà tipicamente identico nei valori casuali prodotti, il che risulterà in un rendering errato. Inteso solo come strumento di debug.");
@@ -597,9 +597,9 @@ namespace dxvk {
 
     // Light Selection/Sampling Options
     RTX_OPTION("rtx", uint16_t, risLightSampleCount, 7,
-               "The number of lights randomly selected from the global pool to consider when selecting a light with RIS.\n"
-               "Higher values generally increases the quality of RIS light sampling, but also has diminishing returns and higher performance cost past a point.\n"
-               "Note that RIS is only used when RTXDI is disabled for direct lighting, or for light sampling in indirect rays, so the impact of this effect will vary.");
+               "Il numero di luci selezionate casualmente dal pool globale da considerare quando si seleziona una luce con RIS.\n"
+               "Valori più alti generalmente aumentano la qualità del campionamento della luce RIS, ma hanno anche rendimenti decrescenti e costi di prestazioni più elevati oltre un certo punto.\n"
+               "Nota che RIS viene utilizzato solo quando RTXDI è disabilitato per l'illuminazione diretta, o per il campionamento della luce nei raggi indiretti, quindi l'impatto di questo effetto varierà.");
 
     // Froxel Radiance Cache/Volumetric Lighting ptions
     // Note: The effective froxel grid resolution (based on the resolution scale) and froxelDepthSlices when multiplied together give the number of froxel cells, and this should be greater than the maximum number of
@@ -793,11 +793,11 @@ namespace dxvk {
       friend class ImGUI;
       bool isSupported = false;
       RTX_OPTION_ENV("rtx.opacityMicromap", bool, enable, true, "DXVK_ENABLE_OPACITY_MICROMAP", 
-                     "Enables Opacity Micromaps for geometries with textures that have alpha cutouts.\n"
-                     "This is generally the case for geometries such as fences, foliage, particles, etc. .\n"
-                     "Opacity Micromaps greatly speed up raytracing of partially opaque triangles.\n"
-                     "Examples of scenes that benefit a lot: multiple trees with a lot of foliage,\n"
-                     "a ground densely covered with grass blades or steam consisting of many particles.");
+                     "Abilita le Opacity Micromaps per le geometrie con texture che hanno ritagli alfa.\n"
+                     "Questo è generalmente il caso per geometrie come recinzioni, fogliame, particelle, ecc.\n"
+                     "Le Opacity Micromaps accelerano notevolmente il raytracing di triangoli parzialmente opachi.\n"
+                     "Esempi di scene che ne beneficiano molto: alberi multipli con molto fogliame,\n"
+                     "un terreno densamente coperto di lame d'erba o vapore composto da molte particelle.");
     } opacityMicromap;
 
     RTX_OPTION("rtx", ReflexMode, reflexMode, ReflexMode::LowLatency,
